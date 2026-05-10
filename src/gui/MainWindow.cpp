@@ -59,6 +59,7 @@
 #include "PluginView.h"
 #include "ProjectJournal.h"
 #include "ProjectNotes.h"
+#include "ScriptWindow.h"
 #include "ProjectRenderer.h"
 #include "RecentProjectsMenu.h"
 #include "RemotePluginBase.h"
@@ -455,6 +456,10 @@ void MainWindow::finalize()
 		tr("Show/hide project notes") + " (Ctrl+7)", this, SLOT(toggleProjectNotesWin()), m_toolBar);
 	project_notes_window->setShortcut(keySequence(Qt::CTRL, Qt::Key_7));
 
+	auto script_window = new ToolButton(embed::getIconPixmap("project_notes"),
+		tr("Show/hide script editor") + " (Ctrl+8)", this, SLOT(toggleScriptWin()), m_toolBar);
+	script_window->setShortcut(keySequence(Qt::CTRL, Qt::Key_8));
+
 	m_toolBarLayout->addWidget( song_editor_window, 1, 1 );
 	m_toolBarLayout->addWidget( pattern_editor_window, 1, 2 );
 	m_toolBarLayout->addWidget( piano_roll_window, 1, 3 );
@@ -462,6 +467,7 @@ void MainWindow::finalize()
 	m_toolBarLayout->addWidget( mixer_window, 1, 5 );
 	m_toolBarLayout->addWidget( controllers_window, 1, 6 );
 	m_toolBarLayout->addWidget( project_notes_window, 1, 7 );
+	m_toolBarLayout->addWidget( script_window, 1, 8 );
 	m_toolBarLayout->setColumnStretch( 100, 1 );
 
 	// setup-dialog opened before?
@@ -1013,6 +1019,10 @@ void MainWindow::toggleProjectNotesWin()
 }
 
 
+void MainWindow::toggleScriptWin()
+{
+	toggleWindow( getGUI()->getScriptWindow() );
+}
 
 
 void MainWindow::togglePianoRollWin()
@@ -1080,6 +1090,10 @@ void MainWindow::updateViewMenu()
 	m_viewMenu->addAction(embed::getIconPixmap( "project_notes" ),
 			      tr( "Project Notes" ) + "\tCtrl+7",
 			      this, SLOT(toggleProjectNotesWin())
+		);
+	m_viewMenu->addAction(embed::getIconPixmap( "project_notes" ),
+			      tr( "Script Editor" ) + "\tCtrl+8",
+			      this, SLOT(toggleScriptWin())
 		);
 
 	m_viewMenu->addSeparator();

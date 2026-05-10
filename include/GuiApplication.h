@@ -44,6 +44,7 @@ class MicrotunerConfig;
 class PatternEditorWindow;
 class PianoRollWindow;
 class ProjectNotes;
+class ScriptWindow;
 class SongEditorWindow;
 
 class LMMS_EXPORT GuiApplication : public QObject
@@ -68,6 +69,7 @@ public:
 	PatternEditorWindow* patternEditor() { return m_patternEditor; }
 	PianoRollWindow* pianoRoll() { return m_pianoRoll; }
 	ProjectNotes* getProjectNotes() { return m_projectNotes; }
+	ScriptWindow* getScriptWindow() { return m_scriptWindow; }
 	MicrotunerConfig* getMicrotunerConfig() { return m_microtunerConfig; }
 	AutomationEditorWindow* automationEditor() { return m_automationEditor; }
 	ControllerRackView* getControllerRackView() { return m_controllerRackView; }
@@ -92,6 +94,7 @@ private:
 	PatternEditorWindow* m_patternEditor;
 	PianoRollWindow* m_pianoRoll;
 	ProjectNotes* m_projectNotes;
+	ScriptWindow* m_scriptWindow;
 	MicrotunerConfig* m_microtunerConfig;
 	ControllerRackView* m_controllerRackView;
 	QLabel* m_loadingProgressLabel;

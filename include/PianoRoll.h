@@ -146,6 +146,8 @@ public:
 		return m_midiClip;
 	}
 
+	MidiClip* getMidiClip() { return m_midiClip; }
+
 	bool hasValidMidiClip() const
 	{
 		return m_midiClip != nullptr;
@@ -559,6 +561,7 @@ public:
 	PianoRollWindow();
 
 	const MidiClip* currentMidiClip() const;
+	MidiClip* getMidiClip() { return m_editor->getMidiClip(); }
 	void setCurrentMidiClip( MidiClip* clip );
 	void setGhostMidiClip( MidiClip* clip );
 

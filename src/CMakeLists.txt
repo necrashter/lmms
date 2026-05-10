@@ -217,4 +217,8 @@ IF(NOT WIN32 AND NOT LMMS_BUILD_APPLE)
 			PERMISSIONS OWNER_READ GROUP_READ WORLD_READ)
 ENDIF()
 
+find_package(Python3 REQUIRED COMPONENTS Development)
+target_include_directories(lmmsobjs PRIVATE ${Python3_INCLUDE_DIRS})
+target_link_libraries(lmmsobjs ${Python3_LIBRARIES})
+
 INSTALL(TARGETS lmms RUNTIME DESTINATION "${BIN_DIR}")

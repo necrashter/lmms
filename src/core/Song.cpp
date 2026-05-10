@@ -52,6 +52,7 @@
 #include "PianoRoll.h"
 #include "ProjectJournal.h"
 #include "ProjectNotes.h"
+#include "ScriptWindow.h"
 #include "Scale.h"
 #include "SongEditor.h"
 #include "PeakController.h"
@@ -1151,6 +1152,10 @@ void Song::loadProject( const QString & fileName )
 				{
 					 getGUI()->getProjectNotes()->SerializingObject::restoreState( node.toElement() );
 				}
+				else if( node.nodeName() == getGUI()->getScriptWindow()->nodeName() )
+				{
+					 getGUI()->getScriptWindow()->SerializingObject::restoreState( node.toElement() );
+				}
 				else if (node.nodeName() == getTimeline(PlayMode::Song).nodeName())
 				{
 					getTimeline(PlayMode::Song).restoreState(node.toElement());
@@ -1233,6 +1238,7 @@ bool Song::saveProjectFile(const QString & filename, bool withResources)
 		getGUI()->pianoRoll()->saveState( dataFile, dataFile.content() );
 		getGUI()->automationEditor()->m_editor->saveState( dataFile, dataFile.content() );
 		getGUI()->getProjectNotes()->SerializingObject::saveState( dataFile, dataFile.content() );
+		getGUI()->getScriptWindow()->SerializingObject::saveState( dataFile, dataFile.content() );
 		getTimeline(PlayMode::Song).saveState(dataFile, dataFile.content());
 	}
 

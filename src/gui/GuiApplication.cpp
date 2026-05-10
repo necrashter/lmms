@@ -38,6 +38,7 @@
 #include "PatternEditor.h"
 #include "PianoRoll.h"
 #include "ProjectNotes.h"
+#include "ScriptWindow.h"
 #include "SongEditor.h"
 
 #include <QApplication>
@@ -176,6 +177,10 @@ GuiApplication::GuiApplication()
 	m_projectNotes = new ProjectNotes;
 	connect(m_projectNotes, SIGNAL(destroyed(QObject*)), this, SLOT(childDestroyed(QObject*)));
 
+	displayInitProgress(tr("Preparing script window"));
+	m_scriptWindow = new ScriptWindow;
+	connect(m_scriptWindow, SIGNAL(destroyed(QObject*)), this, SLOT(childDestroyed(QObject*)));
+
 	displayInitProgress(tr("Preparing microtuner"));
 	m_microtunerConfig = new MicrotunerConfig;
 	connect(m_microtunerConfig, SIGNAL(destroyed(QObject*)), this, SLOT(childDestroyed(QObject*)));
@@ -245,6 +250,10 @@ void GuiApplication::childDestroyed(QObject *obj)
 	else if (obj == m_projectNotes)
 	{
 		m_projectNotes = nullptr;
+	}
+	else if (obj == m_scriptWindow)
+	{
+		m_scriptWindow = nullptr;
 	}
 	else if (obj == m_microtunerConfig)
 	{
